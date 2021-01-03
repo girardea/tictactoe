@@ -162,7 +162,9 @@ if __name__ == "__main__":
             results_o.append(play(p2, p1))
 
         # Display results
-        print(f"Players {args.player1} and {args.player2} played {args.nb} games.")
+        print(
+            f"Players {args.player1.capitalize()} and {args.player2.capitalize()} played {args.nb} games."
+        )
         print(f"Player 1 won {results_x.count('x') + results_o.count('o')} times.")
         print(f"Player 2 won {results_x.count('o') + results_o.count('x')} times.")
         print(f"There where {(results_x + results_o).count('-')} draws.")
