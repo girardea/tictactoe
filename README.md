@@ -42,7 +42,7 @@ If you want to enter the contest, you just need to add your player to the `playe
 {
     "firstname": "Mark",
     "lastname": "Twain",
-    "type": "Q", # 
+    "type": "Q",
     "data": {
         "---------": {
             "1": 0.2,
