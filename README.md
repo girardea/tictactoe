@@ -73,9 +73,6 @@ As soon as you have a few strategies in the `players` subfolder, you may want to
 # if not already in the virtual environment
 pipenv shell
 
-# run all play combinations
-python tictactoe play_all
-
-# show leaderboard
+# runs all play combinations and shows leaderboard
 python tictactoe leaderboard
 ```
