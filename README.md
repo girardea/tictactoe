@@ -74,5 +74,5 @@ As soon as you have a few strategies in the `players` subfolder, you may want to
 pipenv shell
 
 # runs all play combinations and shows leaderboard
-python tictactoe leaderboard
+python tictactoe board
 ```
