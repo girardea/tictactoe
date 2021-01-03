@@ -22,7 +22,7 @@ to the lower-right corner.
 import argparse
 
 # Project modules
-from utils import display, test_finish
+from utils import display, possible_move, test_finish
 
 
 class Strategy(object):
@@ -81,6 +81,26 @@ class SmartStart(Strategy):
         return s[:move] + my_mark + s[move + 1 :]
 
 
+class Human(Strategy):
+    """Asks you to play!"""
+
+    def action(self, s: str, my_mark: str = "x") -> str:
+        """Asks you to play."""
+        # display board (for human to decide)
+        display(s)
+
+        # Ask for action and check its feasibility
+        move = -1
+        while not possible_move(s, move):
+            move = input(
+                f'Où placer "{my_mark}" ?'
+                " (de 1 en haut à gauche à 9 en bas à droite) :"
+            )
+            move = int(move) - 1
+
+        return s[:move] + my_mark + s[move + 1 :]
+
+
 def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
     """Runs a game of tic-tac-toe
 
@@ -133,6 +153,8 @@ def load(player_name: str):
         return Dummy()
     elif player_name == "smart_start":
         return SmartStart()
+    elif player_name == "me":
+        return Human()
     else:
         raise NotImplementedError(f"Could not find {player_name} player.")
 
@@ -162,6 +184,7 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "-n",
         "--nb_plays",
         type=int,
         default=1000,
