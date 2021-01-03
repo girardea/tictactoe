@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 numpy = "*"
+pandas = "*"
+tqdm = "*"
 
 [requires]
 python_version = "3.8"

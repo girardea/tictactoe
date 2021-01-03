@@ -79,3 +79,6 @@ class Human(Strategy):
             move = int(move) - 1
 
         return s[:move] + my_mark + s[move + 1 :]
+
+
+DEFAULT_PLAYERS = [Dummy(), SmartStart()]

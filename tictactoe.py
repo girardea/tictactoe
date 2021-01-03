@@ -21,6 +21,8 @@ to the lower-right corner.
 """
 import argparse
 
+import tqdm
+
 # Project modules
 from players import Strategy, Dummy, SmartStart, Human
 from utils import display, test_finish
@@ -147,3 +149,54 @@ if __name__ == "__main__":
         print(f"{p1_name} won {results_x.count('x') + results_o.count('o')} times.")
         print(f"{p2_name} won {results_x.count('o') + results_o.count('x')} times.")
         print(f"There where {(results_x + results_o).count('-')} draws.")
+
+    elif args.action == "board":
+        print("Playing all possible player combinations...")
+        from itertools import product
+
+        import pandas as pd
+
+        # Compute list of players
+        ll_players = ["dummy", "smart_start"]
+        nb_players = len(ll_players)
+
+        # Divide plays in half
+        half_nb = args.nb // 2
+
+        # Retain scores
+        df_scores = pd.DataFrame(index=ll_players, columns=ll_players, data=0)
+
+        # Run every combination of players
+        # Display progress bar
+        with tqdm.tqdm(total=nb_players ** 2 - nb_players) as pbar:
+            for p1_name, p2_name in product(ll_players, ll_players):
+                # Do not play against one-self
+                if p1_name == p2_name:
+                    continue
+
+                # Display
+                pbar.update(1)
+
+                # Load players
+                p1, p2 = load(p1_name), load(p2_name)
+
+                # Play nb times
+                results_x = []
+                for i in range(args.nb - half_nb):
+                    results_x.append(play(p1, p2))
+
+                results_o = []
+                for i in range(half_nb):
+                    results_o.append(play(p2, p1))
+
+                wins_p1 = results_x.count("x") + results_o.count("o")
+                wins_p2 = results_x.count("o") + results_o.count("x")
+                score_p1 = (wins_p1 - wins_p2) / args.nb
+
+                df_scores.loc[p1_name, p2_name] = score_p1
+                df_scores.loc[p2_name, p1_name] = -score_p1
+
+        print("Finished!")
+        print("Displaying normalized scores...")
+
+        print(df_scores)
