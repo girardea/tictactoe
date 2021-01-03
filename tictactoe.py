@@ -21,6 +21,9 @@ to the lower-right corner.
 """
 import argparse
 
+# Project modules
+from utils import display, test_finish
+
 
 class Strategy(object):
     """All playing strategies should derive from this"""
@@ -50,49 +53,6 @@ class Dummy(Strategy):
         move = np.random.choice(possible_moves)
 
         return s[:move] + my_mark + s[move + 1 :]
-
-
-def display(s: str) -> None:
-    """Nicely display tic-tac-toe state"""
-    assert len(s) == 9
-    assert all([c in ["-", "x", "o"] for c in s])
-
-    print("\n".join([s[:3], s[3:6], s[6:9]]))
-
-
-def test_finish(s: str) -> str:
-    """Returns None if game isnot finished,
-    x if x wins, o if o wins, - if draw.
-    """
-
-    for symbol in ["x", "o"]:
-        # Horizontal wins
-        if all([c == symbol for c in s[:3]]):
-            return symbol
-        if all([c == symbol for c in s[3:6]]):
-            return symbol
-        if all([c == symbol for c in s[6:]]):
-            return symbol
-
-        # Vertical wins
-        if all([c == symbol for c in s[::3]]):
-            return symbol
-        if all([c == symbol for c in s[1::3]]):
-            return symbol
-        if all([c == symbol for c in s[2::3]]):
-            return symbol
-
-        # Diagonal wins
-        if all([c == symbol for c in s[::4]]):
-            return symbol
-        if all([c == symbol for c in s[2:7:2]]):
-            return symbol
-
-    # If no win but no possible move, game is finished with a draw
-    if not ("-" in s):
-        return "-"
-
-    return
 
 
 def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
