@@ -61,7 +61,9 @@ def display(s: str) -> None:
 
 
 def test_finish(s: str) -> str:
-    """Returns None if not finished, x if x wins, o if o wins, - if draw."""
+    """Returns None if game isnot finished,
+    x if x wins, o if o wins, - if draw.
+    """
 
     for symbol in ["x", "o"]:
         # Horizontal wins
@@ -94,7 +96,7 @@ def test_finish(s: str) -> str:
 
 
 def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
-    """Runs nb competitions of tic-tac-toe
+    """Runs a game of tic-tac-toe
 
     Player 1 always plays the "x" mark.
     """
@@ -142,7 +144,7 @@ def load(player_name: str):
     given as an input
     """
     if player_name != "dummy":
-        raise NotImplementedError
+        raise NotImplementedError("Only dummy player is implemented for now.")
 
     return Dummy()
 
