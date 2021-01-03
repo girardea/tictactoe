@@ -40,8 +40,6 @@ python tictactoe play --player1=dummy --player2=me --nb_plays=1
 If you want to enter the contest, you just need to add your player to the `players` subfolder. This project is primarily designed towards value function-oriented and Q-learning algorithms. Therefore, say your name is Mark, you simply need to add to the `players` subfolder a `mark.json` file containing:
 ```json
 {
-    "firstname": "Mark",
-    "lastname": "Twain",
     "type": "Q",
     "data": {
         "---------": {
