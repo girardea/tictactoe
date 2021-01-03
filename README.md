@@ -22,6 +22,12 @@ python tictactoe play --player1=dummy --player2=dummy
 
 By default, `python tictactoe play` runs 1000 games of tic-tac-toe. Player 1 starts for the 500 firsts, and player 2 does for the remaining. This command returns global results.
 
+## Available algorithms
+
+You may currently try out-of-the-box:
+* `dummy` which plays at random,
+* `smart_start` which plays at random except for its first move for which he (tries to) play the center mark.
+
 ## How to play against an algorithm?
 
 There is `--player1=me` option (or `--player2=me`). Just do not forget to change the default number of plays (which is `1000`):

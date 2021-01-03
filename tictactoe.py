@@ -55,6 +55,32 @@ class Dummy(Strategy):
         return s[:move] + my_mark + s[move + 1 :]
 
 
+class SmartStart(Strategy):
+    """Plays at random but has a smarter first move"""
+
+    def action(self, s: str, my_mark: str = "x") -> str:
+        """Plays one random move and returns new state,
+        except for very first move where it plays at center mark.
+        """
+        import numpy as np
+        import re
+
+        # There should be at least one possible move
+        assert "-" in s
+
+        # Play center if very first move
+        if not any([mark == my_mark for mark in s]) and s[4] == "-":
+            move = 4
+        else:
+            # Get all possible moves
+            possible_moves = [m.start() for m in re.finditer("-", s)]
+
+            # Choose one position at random
+            move = np.random.choice(possible_moves)
+
+        return s[:move] + my_mark + s[move + 1 :]
+
+
 def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
     """Runs a game of tic-tac-toe
 
@@ -103,10 +129,12 @@ def load(player_name: str):
     """Returns a Strategy instance based on the name
     given as an input
     """
-    if player_name != "dummy":
-        raise NotImplementedError("Only dummy player is implemented for now.")
-
-    return Dummy()
+    if player_name == "dummy":
+        return Dummy()
+    elif player_name == "smart_start":
+        return SmartStart()
+    else:
+        raise NotImplementedError(f"Could not find {player_name} player.")
 
 
 if __name__ == "__main__":
@@ -162,9 +190,12 @@ if __name__ == "__main__":
             results_o.append(play(p2, p1))
 
         # Display results
-        print(
-            f"Players {args.player1.capitalize()} and {args.player2.capitalize()} played {args.nb} games."
-        )
-        print(f"Player 1 won {results_x.count('x') + results_o.count('o')} times.")
-        print(f"Player 2 won {results_x.count('o') + results_o.count('x')} times.")
+        def prettify_name(s: str):
+            """Displays player names in a nicer way"""
+            return s.replace("_", " ").title()
+
+        p1_name, p2_name = prettify_name(args.player1), prettify_name(args.player2)
+        print(f"{p1_name} and {p2_name} played {args.nb} games.")
+        print(f"{p1_name} won {results_x.count('x') + results_o.count('o')} times.")
+        print(f"{p2_name} won {results_x.count('o') + results_o.count('x')} times.")
         print(f"There where {(results_x + results_o).count('-')} draws.")
