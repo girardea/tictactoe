@@ -17,7 +17,7 @@ You can try it out-of-the-box by running this in a terminal:
 pipenv shell
 
 # runs contest (dummy vs dummy - dummy plays at random)
-python tictactoe play --player1=dummy --player2=dummy
+python tictactoe.py play --player1=dummy --player2=dummy
 ```
 
 By default, `python tictactoe play` runs 1000 games of tic-tac-toe. Player 1 starts for the 500 firsts, and player 2 does for the remaining. This command returns global results.
@@ -74,5 +74,5 @@ As soon as you have a few strategies in the `players` subfolder, you may want to
 pipenv shell
 
 # runs all play combinations and shows leaderboard
-python tictactoe leaderboard
+python tictactoe board
 ```
