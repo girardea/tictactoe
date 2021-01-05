@@ -57,6 +57,11 @@ If you want to enter the contest, you just need to add your player to the `playe
 }
 ```
 
+And run:
+```shell
+python tictactoe.py play --player1=mark
+```
+
 :warning: Note that since dictionaries keys must be strings, you need to provide action indices as such.
 
 Now, it is very important to understand this format, especially the `"data"` part: for any possible tic-tac-toe state (`"---------"` in the example, meaning an empty board, at the very start of the game), it gives you the expected future value of any action. Actions range from 1 to 9. Action 1 means placing a mark in the upper-left corner of the board, and then it goes right and down: action 4, for instance, means placing a mark at the left side of the middle row.
