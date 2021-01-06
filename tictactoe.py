@@ -178,6 +178,7 @@ if __name__ == "__main__":
 
         # Retain scores
         df_scores = pd.DataFrame(index=ll_players, columns=ll_players, data=0)
+        df_wins = pd.DataFrame(index=ll_players, columns=ll_players, data=0)
 
         # Run every combination of players
         # Display progress bar
@@ -209,7 +210,13 @@ if __name__ == "__main__":
                 df_scores.loc[p1_name, p2_name] = score_p1
                 df_scores.loc[p2_name, p1_name] = -score_p1
 
-        print("Finished!")
-        print("Displaying normalized scores...")
+                df_wins.loc[p1_name, p2_name] = wins_p1
+                df_wins.loc[p2_name, p1_name] = wins_p2
 
+        print("Finished!")
+
+        print("\nDisplaying wins...")
+        print(df_wins)
+
+        print("\nDisplaying normalized scores...")
         print(df_scores)
