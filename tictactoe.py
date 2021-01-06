@@ -163,12 +163,14 @@ if __name__ == "__main__":
 
     elif args.action == "board":
         print("Playing all possible player combinations...")
+        from pathlib import Path
         from itertools import product
 
         import pandas as pd
 
         # Compute list of players
         ll_players = ["dummy", "smart_start"]
+        ll_players += [filename.stem for filename in Path("./players/").glob("*.json")]
         nb_players = len(ll_players)
 
         # Divide plays in half
