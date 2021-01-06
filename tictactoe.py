@@ -21,6 +21,8 @@ to the lower-right corner.
 """
 import argparse
 
+from pathlib import Path
+
 import tqdm
 
 # Project modules
@@ -28,7 +30,7 @@ from players import Strategy, Dummy, SmartStart, Human, QStrategy
 from utils import display, test_finish
 
 
-def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
+def play(p1: Strategy, p2: Strategy) -> str:
     """Runs a game of tic-tac-toe
 
     Player 1 always plays the "x" mark.
@@ -42,22 +44,13 @@ def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
     while "-" in s:
         i += 1
 
-        if verbose:
-            print(f"*** Set {i} ***")
-            display(s)
-
         # Player 1
         s = p1.action(s, my_mark="x")
 
         # test win
         win = test_finish(s)
         if win:
-            if verbose:
-                print(win, "wins!")
             return win
-
-        if verbose:
-            display(s)
 
         # Player 2
         s = p2.action(s, my_mark="o")
@@ -65,8 +58,6 @@ def play(p1: Strategy, p2: Strategy, verbose: bool = False) -> str:
         # test win
         win = test_finish(s)
         if win:
-            if verbose:
-                print(win, "wins!")
             return win
 
     return
@@ -163,7 +154,6 @@ if __name__ == "__main__":
 
     elif args.action == "board":
         print("Playing all possible player combinations...")
-        from pathlib import Path
         from itertools import product
 
         import pandas as pd

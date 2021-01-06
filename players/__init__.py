@@ -92,10 +92,6 @@ class QStrategy(Strategy):
 
     def action(self, s: str, my_mark: str = "x") -> str:
         """Finds best action."""
-        if my_mark == "o":
-            # switch "x" and "o"
-            s = s.replace("x", "y").replace("o", "x").replace("y", "o")
-
         # find best action (be aware it could be unfeasible)
         try:
             d = self.Q["data"][s]
