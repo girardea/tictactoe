@@ -6,7 +6,7 @@ When learning how to build up Reinforcement Learning (RL) algorithms, it is good
 
 Install necessary packages by running this in a terminal (if you do not know `pipenv`, see how to install [here](https://github.com/pypa/pipenv)):
 ```shell
-pipenv sync
+python3 -m pipenv sync
 ```
 
 ## How to run?
@@ -14,7 +14,7 @@ pipenv sync
 You can try it out-of-the-box by running this in a terminal:
 ```shell
 # enters pipenv virtual environment
-pipenv shell
+python3 -m pipenv shell
 
 # runs contest (dummy vs dummy - dummy plays at random)
 python tictactoe.py play --player1=dummy --player2=dummy
