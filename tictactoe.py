@@ -36,6 +36,8 @@ def play(p1: Strategy, p2: Strategy) -> str:
     Player 1 always plays the "x" mark.
     """
 
+    print("\n*** Starting game ***\n")
+
     # Initial state
     s = "-" * 9
 
@@ -50,6 +52,8 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
+            print("\n*** Game is over! ***\n")
+            display(s)
             return win
 
         # Player 2
@@ -58,6 +62,8 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
+            print("\n*** Game is over! ***\n")
+            display(s)
             return win
 
     return
@@ -172,7 +178,7 @@ if __name__ == "__main__":
 
         # Run every combination of players
         # Display progress bar
-        with tqdm.tqdm(total=nb_players ** 2 - nb_players) as pbar:
+        with tqdm.tqdm(total=nb_players**2 - nb_players) as pbar:
             for p1_name, p2_name in product(ll_players, ll_players):
                 # Do not play against one-self
                 if p1_name == p2_name:
