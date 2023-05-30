@@ -53,9 +53,13 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
-            if p1.name == "Human" or p2.name == "Human":
-                print("\n*** Game is over! ***\n")
+            if p1.name == "Human":
+                print("\n*** You win! ***\n")
                 display(s)
+            elif p2.name == "Human":
+                print("\n*** You lose! ***\n")
+                display(s)
+
             return win
 
         # Player 2
@@ -64,9 +68,13 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
-            if p1.name == "Human" or p2.name == "Human":
-                print("\n*** Game is over! ***\n")
+            if p1.name == "Human":
+                print("\n*** You lose! ***\n")
                 display(s)
+            elif p2.name == "Human":
+                print("\n*** You win! ***\n")
+                display(s)
+
             return win
 
     return
