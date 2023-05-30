@@ -36,7 +36,8 @@ def play(p1: Strategy, p2: Strategy) -> str:
     Player 1 always plays the "x" mark.
     """
 
-    print("\n*** Starting game ***\n")
+    if p1.name == "Human" or p2.name == "Human":
+        print("\n*** Starting game ***\n")
 
     # Initial state
     s = "-" * 9
@@ -52,8 +53,9 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
-            print("\n*** Game is over! ***\n")
-            display(s)
+            if p1.name == "Human" or p2.name == "Human":
+                print("\n*** Game is over! ***\n")
+                display(s)
             return win
 
         # Player 2
@@ -62,8 +64,9 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
-            print("\n*** Game is over! ***\n")
-            display(s)
+            if p1.name == "Human" or p2.name == "Human":
+                print("\n*** Game is over! ***\n")
+                display(s)
             return win
 
     return
@@ -87,7 +90,7 @@ def load(player_name: str):
             with open("players/" + player_name + ".json") as f:
                 Q = json.load(f)
 
-            return QStrategy(Q)
+            return QStrategy(Q, name=player_name)
         except FileNotFoundError:
             raise FileNotFoundError(f"Could not find {player_name + '.json'} file.")
         except:

@@ -20,6 +20,11 @@ class Strategy(object):
 class Dummy(Strategy):
     """Plays at random"""
 
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.name = "Dummy"
+
     def action(self, s: str, my_mark: str = "x") -> str:
         """Plays one random move and returns new state"""
         import numpy as np
@@ -39,6 +44,11 @@ class Dummy(Strategy):
 
 class SmartStart(Strategy):
     """Plays at random but has a smarter first move"""
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.name = "SmartStart"
 
     def action(self, s: str, my_mark: str = "x") -> str:
         """Plays one random move and returns new state,
@@ -66,6 +76,11 @@ class SmartStart(Strategy):
 class Human(Strategy):
     """Asks you to play!"""
 
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.name = "Human"
+
     def action(self, s: str, my_mark: str = "x") -> str:
         """Asks you to play."""
         # display board (for human to decide)
@@ -86,9 +101,10 @@ class Human(Strategy):
 class QStrategy(Strategy):
     """Implements a state-action value based strategy"""
 
-    def __init__(self, Q: Dict):
+    def __init__(self, Q: Dict, name: str):
         """Needs the Q-function to work (see README.md)"""
         self.Q = Q
+        self.name = name
 
     def action(self, s: str, my_mark: str = "x") -> str:
         """Finds best action."""
