@@ -27,7 +27,7 @@ import tqdm
 
 # Project modules
 from players import Strategy, Dummy, SmartStart, Human, QStrategy
-from utils import display, test_finish
+from utils import display_end_of_game, test_finish
 
 
 def play(p1: Strategy, p2: Strategy) -> str:
@@ -53,13 +53,8 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
-            if p1.name == "Human":
-                print("\n*** You win! ***\n")
-                display(s)
-            elif p2.name == "Human":
-                print("\n*** You lose! ***\n")
-                display(s)
-
+            if "Human" in [p1.name, p2.name]:
+                display_end_of_game(s, win, my_mark="o")
             return win
 
         # Player 2
@@ -68,13 +63,8 @@ def play(p1: Strategy, p2: Strategy) -> str:
         # test win
         win = test_finish(s)
         if win:
-            if p1.name == "Human":
-                print("\n*** You lose! ***\n")
-                display(s)
-            elif p2.name == "Human":
-                print("\n*** You win! ***\n")
-                display(s)
-
+            if "Human" in [p1.name, p2.name]:
+                display_end_of_game(s, win, my_mark="o")
             return win
 
     return
@@ -167,7 +157,7 @@ if __name__ == "__main__":
         print(f"{p1_name} and {p2_name} played {args.nb} games.")
         print(f"{p1_name} won {results_x.count('x') + results_o.count('o')} times.")
         print(f"{p2_name} won {results_x.count('o') + results_o.count('x')} times.")
-        print(f"There where {(results_x + results_o).count('-')} draws.")
+        print(f"There were {(results_x + results_o).count('-')} draws.")
 
     elif args.action == "board":
         print("Playing all possible player combinations...")

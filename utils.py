@@ -12,7 +12,7 @@ def display(s: str) -> None:
 
 
 def test_finish(s: str) -> str:
-    """Returns None if game isnot finished,
+    """Returns None if game is not finished,
     x if x wins, o if o wins, - if draw.
     """
 
@@ -45,6 +45,16 @@ def test_finish(s: str) -> str:
 
     return
 
+def display_end_of_game(s: str, win: str, my_mark: str) -> None:
+    text = ""
+    if win == "-":
+        text = "Draw"
+    elif win == my_mark:
+        text = "You win!"
+    else:
+        text = "You lose!"
+    print(f"\n*** {text} ***\n")
+    display(s)
 
 def possible_move(s: str, move: int) -> bool:
     """Returns True if move is possible, False otherwise"""
